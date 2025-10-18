@@ -5,8 +5,12 @@ import com.linkticinventario.linkticinventario.dto.InventarioResponse;
 import com.linkticinventario.linkticinventario.entity.Inventario;
 import com.linkticinventario.linkticinventario.repository.InventarioRepository;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.http.HttpHeaders;
 
 import java.util.Map;
 
@@ -19,9 +23,19 @@ public class InventarioService {
     @Value("${productos.api.url:http://localhost:8027/productos}")
     private String productosApiUrl;
 
+    @Value("${productos.api.key:MICROSECRET123}") // clave compartida
+    private String productosApiKey;
+
     public InventarioService(InventarioRepository inventarioRepository) {
         this.inventarioRepository = inventarioRepository;
+
+        // Configurar RestTemplate con timeout
         this.restTemplate = new RestTemplate();
+        var factory = restTemplate.getRequestFactory();
+        if (factory instanceof org.springframework.http.client.SimpleClientHttpRequestFactory simpleFactory) {
+            simpleFactory.setConnectTimeout(3000); // 3s conexión
+            simpleFactory.setReadTimeout(3000);    // 3s lectura
+        }
     }
 
     public InventarioResponse consultarCantidad(Long productoId) {
@@ -29,13 +43,13 @@ public class InventarioService {
                 .orElseThrow(() -> new RuntimeException("Inventario no encontrado para producto " + productoId));
 
         // Llamar al microservicio de productos
-        Map<?, ?> productoResponse = restTemplate.getForObject(productosApiUrl + "/" + productoId, Map.class);
+        Map<?, ?> data = obtenerDatosProducto(productoId);
+        Map<?, ?> attributes = (Map<?, ?>) data.get("attributes");
 
-        Map<?, ?> data = (Map<?, ?>) productoResponse.get("data");
-
+        // Construir respuesta final
         InventarioResponse response = new InventarioResponse();
         response.setProductoId(productoId);
-        response.setNombreProducto((String) data.get("nombre"));
+        response.setNombreProducto((String) attributes.get("nombre"));
         response.setCantidad(inventario.getCantidad());
         return response;
     }
@@ -57,5 +71,37 @@ public class InventarioService {
         Inventario inventario = new Inventario(request.getProductoId(), request.getCantidad());
         inventarioRepository.save(inventario);
         return consultarCantidad(request.getProductoId());
+    }
+
+    // Llamar al microservicio de productos
+    private Map<?, ?> obtenerDatosProducto(Long productoId) {
+        String url = productosApiUrl + "/" + productoId;
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("x-api-key", productosApiKey); // se envía la API key
+        HttpEntity<Void> entity = new HttpEntity<>(headers);
+
+        int reintentos = 3;
+        for (int i = 1; i <= reintentos; i++) {
+            try {
+                ResponseEntity<Map> response = restTemplate.exchange(
+                        url,
+                        HttpMethod.GET,
+                        entity,
+                        Map.class
+                );
+                if (response.getStatusCode().is2xxSuccessful()) {
+                    Map<?, ?> body = response.getBody();
+                    if (body == null) throw new RuntimeException("Respuesta vacía del microservicio de productos");
+
+                    return (Map<?, ?>) body.get("data");
+                }
+            } catch (Exception ex) {
+                System.out.println("Intento " + i + " falló al consultar producto: " + ex.getMessage());
+                if (i == reintentos) throw new RuntimeException("Fallo al conectar con microservicio de productos");
+                try { Thread.sleep(1000L); } catch (InterruptedException ignored) {}
+            }
+        }
+        throw new RuntimeException("No se pudo obtener el producto después de varios intentos");
     }
 }
