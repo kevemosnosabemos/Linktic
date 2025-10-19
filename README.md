@@ -74,3 +74,22 @@ B) Las pruebas unitarias se ejecutan con H2 en memoria para no depender de Docke
 
 C) Se usan perfiles de Spring (test, prod) para separar configuración de entornos.
 
+D) Cobertura de Pruebas de 60%
+
+<img width="843" height="213" alt="image" src="https://github.com/user-attachments/assets/68e32a9c-392e-451b-9b4f-767ff28d53cc" />
+
+E) Ramas de Git usadas
+
+<img width="2184" height="412" alt="image" src="https://github.com/user-attachments/assets/1aab624e-a321-4bf9-8bd1-51208bdabe83" />
+
+F) Ejecutando los end-points en Bruno (Programa similar a Postman)
+
+<img width="1405" height="498" alt="image" src="https://github.com/user-attachments/assets/0ca1a80b-6af0-485e-819a-826d96f5e6c8" />
+
+H) Docker Composer corriendo
+
+<img width="1226" height="213" alt="image" src="https://github.com/user-attachments/assets/1258ca88-ce37-4713-99d9-ab31b896f62e" />
+
+
+
+
