@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +17,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+@ActiveProfiles("test")
 @SpringBootTest
 class InventarioServiceTest {
 
@@ -55,7 +57,7 @@ class InventarioServiceTest {
         when(inventarioRepository.save(any(Inventario.class))).thenReturn(inventario);
         when(inventarioRepository.findByProductoId(100L)).thenReturn(Optional.of(inventario));
 
-        // ⚠️ Se usa "espía" para simular el método privado obtenerDatosProducto
+        // Se usa "espía" para simular el método privado obtenerDatosProducto
         InventarioService spyService = Mockito.spy(inventarioService);
         doReturn(data).when(spyService).obtenerDatosProducto(100L);
 

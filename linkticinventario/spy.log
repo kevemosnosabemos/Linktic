@@ -1,0 +1,39 @@
+1760882351805|1|statement|connection 0|url jdbc:p6spy:mariadb://localhost:3306/inventariodb|SELECT @@character_set_database, @@sql_mode|SELECT @@character_set_database, @@sql_mode
+1760882352402|0|statement|connection 0|url jdbc:p6spy:mariadb://localhost:3306/inventariodb|select table_name from information_schema.TABLES where table_schema=database() and table_type='SEQUENCE'|select table_name from information_schema.TABLES where table_schema=database() and table_type='SEQUENCE'
+1760882368535|1|statement|connection 0|url jdbc:p6spy:mariadb://localhost:3306/inventariodb|SELECT @@character_set_database, @@sql_mode|SELECT @@character_set_database, @@sql_mode
+1760882369130|0|statement|connection 0|url jdbc:p6spy:mariadb://localhost:3306/inventariodb|select table_name from information_schema.TABLES where table_schema=database() and table_type='SEQUENCE'|select table_name from information_schema.TABLES where table_schema=database() and table_type='SEQUENCE'
+1760882370255|0|statement|connection 0|url jdbc:p6spy:mariadb://localhost:3306/inventariodb|select i1_0.id,i1_0.cantidad,i1_0.producto_id from inventarios i1_0|select i1_0.id,i1_0.cantidad,i1_0.producto_id from inventarios i1_0
+1760882370294|0|statement|connection 0|url jdbc:p6spy:mariadb://localhost:3306/inventariodb|delete from inventarios where id=?|delete from inventarios where id=15
+1760882370297|1|statement|connection 0|url jdbc:p6spy:mariadb://localhost:3306/inventariodb|delete from inventarios where id=?|delete from inventarios where id=16
+1760882370298|0|commit|connection 0|url jdbc:p6spy:mariadb://localhost:3306/inventariodb||
+1760882370345|0|statement|connection 0|url jdbc:p6spy:mariadb://localhost:3306/inventariodb|insert into inventarios (cantidad,producto_id) values (?,?)|insert into inventarios (cantidad,producto_id) values (10,100)
+1760882370352|1|commit|connection 0|url jdbc:p6spy:mariadb://localhost:3306/inventariodb||
+1760882370395|0|statement|connection 0|url jdbc:p6spy:mariadb://localhost:3306/inventariodb|select i1_0.id,i1_0.cantidad,i1_0.producto_id from inventarios i1_0 where i1_0.producto_id=?|select i1_0.id,i1_0.cantidad,i1_0.producto_id from inventarios i1_0 where i1_0.producto_id=100
+1760882370411|0|statement|connection 0|url jdbc:p6spy:mariadb://localhost:3306/inventariodb|select i1_0.id,i1_0.cantidad,i1_0.producto_id from inventarios i1_0|select i1_0.id,i1_0.cantidad,i1_0.producto_id from inventarios i1_0
+1760882370412|0|statement|connection 0|url jdbc:p6spy:mariadb://localhost:3306/inventariodb|delete from inventarios where id=?|delete from inventarios where id=17
+1760882370413|0|commit|connection 0|url jdbc:p6spy:mariadb://localhost:3306/inventariodb||
+1760882370414|0|statement|connection 0|url jdbc:p6spy:mariadb://localhost:3306/inventariodb|insert into inventarios (cantidad,producto_id) values (?,?)|insert into inventarios (cantidad,producto_id) values (15,100)
+1760882370415|0|commit|connection 0|url jdbc:p6spy:mariadb://localhost:3306/inventariodb||
+1760882370416|0|statement|connection 0|url jdbc:p6spy:mariadb://localhost:3306/inventariodb|select i1_0.id,i1_0.cantidad,i1_0.producto_id from inventarios i1_0 where i1_0.producto_id=?|select i1_0.id,i1_0.cantidad,i1_0.producto_id from inventarios i1_0 where i1_0.producto_id=100
+1760882370423|0|statement|connection 0|url jdbc:p6spy:mariadb://localhost:3306/inventariodb|select i1_0.id,i1_0.cantidad,i1_0.producto_id from inventarios i1_0 where i1_0.id=?|select i1_0.id,i1_0.cantidad,i1_0.producto_id from inventarios i1_0 where i1_0.id=18
+1760882370428|0|statement|connection 0|url jdbc:p6spy:mariadb://localhost:3306/inventariodb|update inventarios set cantidad=?,producto_id=? where id=?|update inventarios set cantidad=10,producto_id=100 where id=18
+1760882370429|0|commit|connection 0|url jdbc:p6spy:mariadb://localhost:3306/inventariodb||
+1760882370431|0|statement|connection 0|url jdbc:p6spy:mariadb://localhost:3306/inventariodb|select i1_0.id,i1_0.cantidad,i1_0.producto_id from inventarios i1_0 where i1_0.producto_id=?|select i1_0.id,i1_0.cantidad,i1_0.producto_id from inventarios i1_0 where i1_0.producto_id=100
+1760882937320|4|statement|connection 0|url jdbc:p6spy:mariadb://localhost:3306/inventariodb|SELECT @@character_set_database, @@sql_mode|SELECT @@character_set_database, @@sql_mode
+1760882938423|0|statement|connection 0|url jdbc:p6spy:mariadb://localhost:3306/inventariodb|select table_name from information_schema.TABLES where table_schema=database() and table_type='SEQUENCE'|select table_name from information_schema.TABLES where table_schema=database() and table_type='SEQUENCE'
+1760882940468|0|statement|connection 0|url jdbc:p6spy:mariadb://localhost:3306/inventariodb|select i1_0.id,i1_0.cantidad,i1_0.producto_id from inventarios i1_0|select i1_0.id,i1_0.cantidad,i1_0.producto_id from inventarios i1_0
+1760882940600|1|statement|connection 0|url jdbc:p6spy:mariadb://localhost:3306/inventariodb|delete from inventarios where id=?|delete from inventarios where id=18
+1760882940605|1|commit|connection 0|url jdbc:p6spy:mariadb://localhost:3306/inventariodb||
+1760882940752|0|statement|connection 0|url jdbc:p6spy:mariadb://localhost:3306/inventariodb|insert into inventarios (cantidad,producto_id) values (?,?)|insert into inventarios (cantidad,producto_id) values (10,100)
+1760882940775|1|commit|connection 0|url jdbc:p6spy:mariadb://localhost:3306/inventariodb||
+1760882940861|0|statement|connection 0|url jdbc:p6spy:mariadb://localhost:3306/inventariodb|select i1_0.id,i1_0.cantidad,i1_0.producto_id from inventarios i1_0 where i1_0.producto_id=?|select i1_0.id,i1_0.cantidad,i1_0.producto_id from inventarios i1_0 where i1_0.producto_id=100
+1760882940871|0|statement|connection 0|url jdbc:p6spy:mariadb://localhost:3306/inventariodb|select i1_0.id,i1_0.cantidad,i1_0.producto_id from inventarios i1_0|select i1_0.id,i1_0.cantidad,i1_0.producto_id from inventarios i1_0
+1760882940872|0|statement|connection 0|url jdbc:p6spy:mariadb://localhost:3306/inventariodb|delete from inventarios where id=?|delete from inventarios where id=19
+1760882940873|0|commit|connection 0|url jdbc:p6spy:mariadb://localhost:3306/inventariodb||
+1760882940875|0|statement|connection 0|url jdbc:p6spy:mariadb://localhost:3306/inventariodb|insert into inventarios (cantidad,producto_id) values (?,?)|insert into inventarios (cantidad,producto_id) values (15,100)
+1760882940876|0|commit|connection 0|url jdbc:p6spy:mariadb://localhost:3306/inventariodb||
+1760882940879|0|statement|connection 0|url jdbc:p6spy:mariadb://localhost:3306/inventariodb|select i1_0.id,i1_0.cantidad,i1_0.producto_id from inventarios i1_0 where i1_0.producto_id=?|select i1_0.id,i1_0.cantidad,i1_0.producto_id from inventarios i1_0 where i1_0.producto_id=100
+1760882940895|0|statement|connection 0|url jdbc:p6spy:mariadb://localhost:3306/inventariodb|select i1_0.id,i1_0.cantidad,i1_0.producto_id from inventarios i1_0 where i1_0.id=?|select i1_0.id,i1_0.cantidad,i1_0.producto_id from inventarios i1_0 where i1_0.id=20
+1760882940909|0|statement|connection 0|url jdbc:p6spy:mariadb://localhost:3306/inventariodb|update inventarios set cantidad=?,producto_id=? where id=?|update inventarios set cantidad=10,producto_id=100 where id=20
+1760882940913|0|commit|connection 0|url jdbc:p6spy:mariadb://localhost:3306/inventariodb||
+1760882940916|0|statement|connection 0|url jdbc:p6spy:mariadb://localhost:3306/inventariodb|select i1_0.id,i1_0.cantidad,i1_0.producto_id from inventarios i1_0 where i1_0.producto_id=?|select i1_0.id,i1_0.cantidad,i1_0.producto_id from inventarios i1_0 where i1_0.producto_id=100
