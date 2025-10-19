@@ -6,11 +6,11 @@ import com.linkticinventario.linkticinventario.entity.Inventario;
 import com.linkticinventario.linkticinventario.repository.InventarioRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.http.HttpHeaders;
 
 import java.util.Map;
 
@@ -61,20 +61,43 @@ public class InventarioService {
         inventario.setCantidad(inventario.getCantidad() - cantidadVendida);
         inventarioRepository.save(inventario);
 
-        System.out.println("📦 Evento: El inventario del producto " + productoId +
+        System.out.println("* Evento: El inventario del producto " + productoId +
                 " ha cambiado. Nueva cantidad: " + inventario.getCantidad());
 
         return consultarCantidad(productoId);
     }
 
     public InventarioResponse crearInventario(InventarioRequest request) {
-        Inventario inventario = new Inventario(request.getProductoId(), request.getCantidad());
-        inventarioRepository.save(inventario);
-        return consultarCantidad(request.getProductoId());
+        try {
+            // Primero intenta obtener datos del producto
+            Map<?, ?> data = obtenerDatosProducto(request.getProductoId());
+            if (data == null || data.isEmpty()) {
+                throw new RuntimeException("Producto no encontrado");
+            }
+
+            // Si el producto existe, guardamos el inventario
+            Inventario inventario = new Inventario(request.getProductoId(), request.getCantidad());
+            inventarioRepository.save(inventario);
+
+            // Construir respuesta final
+            Map<?, ?> attributes = (Map<?, ?>) data.get("attributes");
+            InventarioResponse response = new InventarioResponse();
+            response.setProductoId(request.getProductoId());
+            response.setCantidad(request.getCantidad());
+            if (attributes != null) {
+                response.setNombreProducto((String) attributes.get("nombre"));
+            }
+
+            return response;
+
+        } catch (RuntimeException e) {
+            // No guardar inventario si hubo error al obtener el producto
+            throw new RuntimeException(e.getMessage());
+        }
     }
 
     // Llamar al microservicio de productos
-    private Map<?, ?> obtenerDatosProducto(Long productoId) {
+    protected Map<?, ?> obtenerDatosProducto(Long productoId) {
         String url = productosApiUrl + "/" + productoId;
 
         HttpHeaders headers = new HttpHeaders();
@@ -90,18 +113,26 @@ public class InventarioService {
                         entity,
                         Map.class
                 );
+
                 if (response.getStatusCode().is2xxSuccessful()) {
                     Map<?, ?> body = response.getBody();
-                    if (body == null) throw new RuntimeException("Respuesta vacía del microservicio de productos");
-
+                    if (body == null) {
+                        throw new RuntimeException("Respuesta vacía del microservicio de productos");
+                    }
                     return (Map<?, ?>) body.get("data");
                 }
+
             } catch (Exception ex) {
                 System.out.println("Intento " + i + " falló al consultar producto: " + ex.getMessage());
-                if (i == reintentos) throw new RuntimeException("Fallo al conectar con microservicio de productos");
-                try { Thread.sleep(1000L); } catch (InterruptedException ignored) {}
+                if (i == reintentos) {
+                    throw new RuntimeException("Fallo al conectar con microservicio de productos");
+                }
+                try {
+                    Thread.sleep(1000L);
+                } catch (InterruptedException ignored) {}
             }
         }
+
         throw new RuntimeException("No se pudo obtener el producto después de varios intentos");
     }
 }
