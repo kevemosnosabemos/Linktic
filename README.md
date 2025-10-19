@@ -1,6 +1,4 @@
----Requisitos y Ejecucion
-
-Requisitos:
+---Requisitos
 
 -Java 21
 
