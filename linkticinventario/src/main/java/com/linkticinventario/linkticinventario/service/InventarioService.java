@@ -18,7 +18,7 @@ import java.util.Map;
 public class InventarioService {
 
     private final InventarioRepository inventarioRepository;
-    private final RestTemplate restTemplate;
+    final RestTemplate restTemplate;
 
     @Value("${productos.api.url:http://localhost:8027/productos}")
     private String productosApiUrl;
