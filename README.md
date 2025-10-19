@@ -30,22 +30,15 @@ Opcion 2: Correr los microservicios desde Intelij o cualquier programa para ejec
 
 ---Diagrama de Interaccion entre servicios
 
-+----------------+           +----------------+
-| Producto       |           | Inventario     |
-| Service        |           | Service        |
-+----------------+           +----------------+
-^                            ^
-| HTTP REST API              |
-|                            |
-+----------------------------+
-Consumo de ProductoService
+<img width="936" height="433" alt="image" src="https://github.com/user-attachments/assets/c36c1664-c61f-4579-9d6d-7ce9edd44a4f" />
+
+Descripcion Sencilla: El usuario puede consumir ya sea el servicio de producto o inventario. Él puede crear, modificar, ver, eliminar productos el cual se guardara en la BD. Tambien puede hacer lo mismo con el inventario, y dependiendo de la accion, ej comprar o ver informacion: este hara una peticion al servicio de productos
 
 1) Inventario Service recibe petición de creación/actualización de stock.
 
 2) Llama a Producto Service para validar existencia y obtener datos del producto.
 
 3) Guarda o actualiza el inventario en su base de datos.
-
 
 ---Endpoints (Swagger/OpenAPI)
 
@@ -64,6 +57,9 @@ http://localhost:8027/swagger-ui/index.html
 <img width="1837" height="931" alt="image" src="https://github.com/user-attachments/assets/43fa50ff-3a88-459b-aeee-2a3b7500c622" />
 
 
+---Descripcion de la Arquitectura usada
+
+ Se uso una arquitectura de microservicios con arquitectura en capas interna (controlador -> servicio -> repositorio) en cada microservicio, y la comunicación entre ellos se hace mediante consumo de APIs.
 
 
 ---Notas técnicas
