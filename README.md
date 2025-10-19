@@ -54,6 +54,7 @@ Producto Service: GET /productos, PUT /productos/{id}, DELETE /productos/{id}
 Inventario Service: GET /inventarios/{productoId}, POST /inventarios, PUT /inventarios/{productoId}
 
 Documentación interactiva disponible en los enlaces de Swagger:
+
 http://localhost:8028/swagger-ui/index.html
 
 http://localhost:8027/swagger-ui/index.html
