@@ -59,6 +59,12 @@ http://localhost:8028/swagger-ui/index.html
 
 http://localhost:8027/swagger-ui/index.html
 
+<img width="1972" height="1126" alt="image" src="https://github.com/user-attachments/assets/9a7547e7-b8b8-4a57-bfde-afe3de04f909" />
+
+<img width="1837" height="931" alt="image" src="https://github.com/user-attachments/assets/43fa50ff-3a88-459b-aeee-2a3b7500c622" />
+
+
+
 
 ---Notas técnicas
 
