@@ -1,0 +1,18 @@
+version: '3.9'
+
+services:
+  producto:
+    build: ./linkticproducto
+    container_name: producto-service
+    ports:
+      - "8027:8027"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+
+  inventario:
+    build: ./linkticinventario
+    container_name: inventario-service
+    ports:
+      - "8028:8028"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
