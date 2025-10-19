@@ -17,6 +17,14 @@ public class ApiKeyFilter implements Filter {
             throws IOException, ServletException {
 
         HttpServletRequest httpRequest = (HttpServletRequest) request;
+        String path = httpRequest.getRequestURI();
+
+        // Permitir Swagger y OpenAPI
+        if (path.startsWith("/v3/api-docs") || path.startsWith("/swagger-ui") || path.startsWith("/swagger-ui.html")) {
+            chain.doFilter(request, response);
+            return;
+        }
+
         String apiKey = httpRequest.getHeader(API_KEY_HEADER);
 
         if (apiKey == null || !apiKey.equals(VALID_API_KEY)) {
