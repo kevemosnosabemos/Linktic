@@ -20,7 +20,7 @@ public class InventarioService {
     private final InventarioRepository inventarioRepository;
     final RestTemplate restTemplate;
 
-    @Value("${productos.api.url:http://localhost:8027/productos}")
+    @Value("${productos.api.url:http://producto:8027/productos/}")
     private String productosApiUrl;
 
     @Value("${productos.api.key:MICROSECRET123}") // clave compartida

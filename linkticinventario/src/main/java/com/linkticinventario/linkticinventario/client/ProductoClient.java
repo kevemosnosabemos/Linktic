@@ -8,7 +8,7 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class ProductoClient {
 
-    private static final String BASE_URL = "http://localhost:8027/productos/";
+    private static final String BASE_URL = "http://producto:8027/productos/";
     private static final String API_KEY = "MICROSECRET123";
 
     @Autowired

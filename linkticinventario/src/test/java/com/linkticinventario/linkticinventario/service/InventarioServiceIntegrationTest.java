@@ -58,7 +58,7 @@ class InventarioServiceIntegrationTest {
         }
         """;
 
-        mockServer.expect(once(), requestTo("http://localhost:8027/productos/100"))
+        mockServer.expect(once(), requestTo("http://producto:8027/productos/100"))
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withSuccess(jsonProducto, MediaType.APPLICATION_JSON));
 
@@ -102,7 +102,7 @@ class InventarioServiceIntegrationTest {
         }
         """;
 
-        mockServer.expect(once(), requestTo("http://localhost:8027/productos/100"))
+        mockServer.expect(once(), requestTo("http://producto:8027/productos/100"))
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withSuccess(jsonProducto, MediaType.APPLICATION_JSON));
 
