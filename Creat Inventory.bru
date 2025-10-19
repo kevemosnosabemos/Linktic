@@ -1,0 +1,18 @@
+meta {
+  name: Creat Inventory
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:8028/inventarios
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "productoId": 24,
+    "cantidad": 100
+  }
+}

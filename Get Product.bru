@@ -1,0 +1,15 @@
+meta {
+  name: Get Product
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:8027/productos
+  body: none
+  auth: inherit
+}
+
+headers {
+  x-api-key: MICROSECRET123
+}

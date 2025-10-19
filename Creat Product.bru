@@ -1,0 +1,22 @@
+meta {
+  name: Creat Product
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8027/productos
+  body: json
+  auth: inherit
+}
+
+headers {
+  x-api-key: MICROSECRET123
+}
+
+body:json {
+  {
+    "nombre": "SUPER LAPTOP",
+    "precio": 90500.0
+  }
+}

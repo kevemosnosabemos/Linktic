@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "Linktic",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}
